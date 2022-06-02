@@ -10,13 +10,13 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-        <title>Login</title>
+        <title>Modificar Usuario</title>
     </head>
 
     <body>
         <header class="site-header sticky-top py-1">
             <nav class="container d-flex flex-column flex-md-row justify-content-between">
-                <a class="py-2 d-none d-md-inline-block" href="../../usermain.html">Regresar</a>
+                <a class="py-2 d-none d-md-inline-block" href="../../usermain.php">Regresar</a>
             </nav>
         </header>
         <form method="POST" enctype="multipart/form-data" >

@@ -14,8 +14,8 @@
 <body>
     <header class="site-header sticky-top py-1">
         <nav class="container d-flex flex-column flex-md-row justify-content-between">
-            <a class="py-2 d-none d-md-inline-block" href="admin/view/crearusuario.form.html">Crear usuario</a>
-            <a class="py-2 d-none d-md-inline-block" href="admin/login.html">Iniciar Sesion</a>
+            <a class="py-2 d-none d-md-inline-block" href="admin/view/crearusuario.form.php">Crear usuario</a>
+            <a class="py-2 d-none d-md-inline-block" href="admin/login.php">Iniciar Sesion</a>
         </nav>
     </header>
     <main>
@@ -25,7 +25,7 @@
             <p class="lead fw-normal">Vamos a disfrutar de esta prueba de la aplicacion para nuestra REST-API <br>
                 Comienza a administrar tus tareas y Proyectos ahora mismo, iniciando Sesión!!
             </p>
-            <a class="btn btn-outline-secondary" href="admin/login.html">Iniciar Sesión</a>
+            <a class="btn btn-outline-secondary" href="admin/login.php">Iniciar Sesión</a>
             </div>
             <div class="product-device shadow-sm d-none d-md-block"></div>
             <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>

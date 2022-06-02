@@ -14,11 +14,11 @@
 <body>
     <header class="site-header sticky-top py-1">
         <nav class="container d-flex flex-column flex-md-row justify-content-between">
-            <a class="py-2 d-none d-md-inline-block" href="admin/tareas.html">Administrar Tareas</a>
-            <a class="py-2 d-none d-md-inline-block" href="admin/proyectos.html">Administrar Proyectos</a>
-            <a class="py-2 d-none d-md-inline-block" href="admin/view/modificarusuario.form.html">Modificar mi usuario</a>
+            <a class="py-2 d-none d-md-inline-block" href="admin/tareas.php">Administrar Tareas</a>
+            <a class="py-2 d-none d-md-inline-block" href="admin/proyectos.php">Administrar Proyectos</a>
+            <a class="py-2 d-none d-md-inline-block" href="admin/view/modificarusuario.form.php">Modificar mi usuario</a>
             <a class="py-2 d-none d-md-inline-block" href="#">Eliminar mi usuario</a>
-            <a class="py-2 d-none d-md-inline-block" href="index.html">Cerrar Sesión</a>
+            <a class="py-2 d-none d-md-inline-block" href="index.php">Cerrar Sesión</a>
         </nav>
     </header>
     <main>
@@ -28,8 +28,8 @@
             <p class="lead fw-normal">Se te ocurre la mejor forma de administrar tu tiempo y tus futuros proyectos <br>
                 Gracias por dejar esta importante labor en nuestras manos uwu 
             </p>
-                <a class="btn btn-outline-secondary" href="admin/tareas.html">Administrar Tareas</a>
-                <a class="btn btn-outline-secondary" href="admin/proyectos.html">Administrar Proyectos</a>
+                <a class="btn btn-outline-secondary" href="admin/tareas.php">Administrar Tareas</a>
+                <a class="btn btn-outline-secondary" href="admin/proyectos.php">Administrar Proyectos</a>
             </div>
             <div class="product-device shadow-sm d-none d-md-block"></div>
             <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>

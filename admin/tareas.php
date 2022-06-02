@@ -17,13 +17,13 @@
 <body>
     <header class="site-header sticky-top py-1">
         <nav class="container d-flex flex-column flex-md-row justify-content-between">
-            <a class="py-2 d-none d-md-inline-block" href="../UserMain.html">Regresar</a>
+            <a class="py-2 d-none d-md-inline-block" href="../UserMain.php">Regresar</a>
         </nav>
     </header>
     <div id="medio" class="row">
         <div class="col">
         <h1 class="text-center">Tareas</h1>
-            <a class="btn btn-success" href="view/creartarea.form.html" role="button"><i class="fa-solid fa-plus"></i></a>
+            <a class="btn btn-success" href="view/creartarea.form.php" role="button"><i class="fa-solid fa-plus"></i></a>
             <table class="table">
                 <thead>
                     <tr>
@@ -35,7 +35,7 @@
                     
                     <tr>
                         <td>Ejemplo</td>
-                        <td><a class="btn btn-danger" href="#" role="button"><i class="fa-solid fa-eraser"></i></a><a class="btn btn-success" href="view/modificartarea.form.html" role="button"><i class="fa-solid fa-wand-magic-sparkles"></i></a></td>
+                        <td><a class="btn btn-danger" href="#" role="button"><i class="fa-solid fa-eraser"></i></a><a class="btn btn-success" href="view/modificartarea.form.php" role="button"><i class="fa-solid fa-wand-magic-sparkles"></i></a></td>
                     </tr>
                 </tbody>
             </table>
