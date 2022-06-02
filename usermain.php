@@ -14,7 +14,6 @@
 <body>
     <header class="site-header sticky-top py-1">
         <nav class="container d-flex flex-column flex-md-row justify-content-between">
-            <a class="py-2 d-none d-md-inline-block" href="admin/tareas.php">Administrar Tareas</a>
             <a class="py-2 d-none d-md-inline-block" href="admin/proyectos.php">Administrar Proyectos</a>
             <a class="py-2 d-none d-md-inline-block" href="admin/view/modificarusuario.form.php">Modificar mi usuario</a>
             <a class="py-2 d-none d-md-inline-block" href="#">Eliminar mi usuario</a>

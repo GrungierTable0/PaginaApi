@@ -34,8 +34,12 @@
                 <tbody>
                     
                     <tr>
-                        <td></td>
-                        <td><a class="btn btn-danger" href="#" role="button"><i class="fa-solid fa-eraser"></i></a><a class="btn btn-success" href="view/modificarproyecto.form.php" role="button"><i class="fa-solid fa-wand-magic-sparkles"></i></a></td>
+                        <td>Ejemplo Proyecto</td>
+                        <td >
+                            <a class="btn btn-danger" href="#" role="button"><i class="fa-solid fa-eraser"></i></a>
+                            <a class="btn btn-success" href="view/modificarproyecto.form.php" role="button"><i class="fa-solid fa-wand-magic-sparkles"></i></a>
+                            <a class="btn btn-success" href="tareas.php" role="button">Administrar Tareas</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
