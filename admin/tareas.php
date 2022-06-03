@@ -1,3 +1,9 @@
+<?php
+    require_once('../class/tarea.class.php');
+    session_start();
+    $id= isset($_GET['id']) ? $_GET['id'] : null;
+    $_SESSION['id']=$id;
+?>
 <!doctype html>
 <html lang="en">
 
@@ -23,25 +29,44 @@
     <div id="medio" class="row">
         <div class="col">
         <h1 class="text-center">Tareas</h1>
-            <a class="btn btn-success" href="view/creartarea.form.php" role="button"><i class="fa-solid fa-plus"></i></a>
+            <a class="btn btn-success" href="view/creartarea.form.php?id=<?php echo $_SESSION['id'] ?>" role="button"><i class="fa-solid fa-plus"></i></a>
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">Descripción</th>
+                        <th scope="col">Completada?</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <?php
+                        $tasks=$tarea->select($id,$_SESSION["auth"]);
+                        foreach($tasks as $task):
+                    ?>
                     <tr>
-                        <td>Ejemplo</td>
-                        <td><a class="btn btn-danger" href="#" role="button"><i class="fa-solid fa-eraser"></i></a><a class="btn btn-success" href="view/modificartarea.form.php" role="button"><i class="fa-solid fa-wand-magic-sparkles"></i></a></td>
+                        <td><?php echo $task->description?></td>
+                        <td><?php if($task->finished==1){echo 'Chi uwu';} else{echo'no qwq';}?></td>
+                        <td>
+                            <a class="btn btn-danger" href="?id=<?php echo $_SESSION['id']?>&idt=<?php echo $task->id?>" role="button"><i class="fa-solid fa-eraser"></i></a>
+                            <a class="btn btn-success" href="view/modificartarea.form.php?idt=<?php echo $task->id?>" role="button"><i class="fa-solid fa-wand-magic-sparkles"></i></a>
+                        </td>
                     </tr>
+                    <?php
+                        endforeach;
+                        $idt= isset($_GET['idt']) ? $_GET['idt'] : null;
+                        if(is_null($idt)){}else{
+                            $respond = $tarea->delete($idt,$_SESSION['auth']);
+                            print_r($respond);
+                            if(empty($_GET['status'])){
+                                header("Location:?id=".$_SESSION['id']."&status=1");
+                           }
+                        }
+                    ?>
                 </tbody>
             </table>
             <p class="text-left" ></p>
         </div>
-            
-    </body>
+    </div>  
+</body>
 
 </html>

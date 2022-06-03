@@ -1,3 +1,7 @@
+<?php
+    require_once('../class/proyecto.class.php');
+    session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -32,18 +36,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <?php
+                        $proyects=$proyecto->select($_SESSION["auth"]);
+                        foreach($proyects as $proyect):
+                    ?>
                     <tr>
-                        <td>Ejemplo Proyecto</td>
+                        <td><?php echo $proyect->name?></td>
                         <td >
-                            <a class="btn btn-danger" href="#" role="button"><i class="fa-solid fa-eraser"></i></a>
-                            <a class="btn btn-success" href="view/modificarproyecto.form.php" role="button"><i class="fa-solid fa-wand-magic-sparkles"></i></a>
-                            <a class="btn btn-success" href="tareas.php" role="button">Administrar Tareas</a>
+                            <a class="btn btn-danger" href="?id=<?php echo $proyect->id?>" role="button"><i class="fa-solid fa-eraser"></i></a>
+                            <a class="btn btn-success" href="view/modificarproyecto.form.php?id=<?php echo $proyect->id?>" role="button"><i class="fa-solid fa-wand-magic-sparkles"></i></a>
+                            <a class="btn btn-success" href="tareas.php?id=<?php echo $proyect->id?>" role="button">Administrar Tareas</a>
                         </td>
-                    </tr>
+                    </tr>    
+                    <?php
+                        endforeach;
+                        
+                        $id= isset($_GET['id']) ? $_GET['id'] : null;
+                        if(is_null($id)){}else{
+                            $respond = $proyecto->delete($id,$_SESSION['auth']);
+                            if(empty($_GET['status'])){
+                                header('Location:?status=1');
+                                exit;
+                           }
+                        }
+                    ?>
+                        
+                    
+                    
+                    
+                    
                 </tbody>
             </table>
-            <p class="text-left" ></p>
+                
         </div>
     </div>        
 </body>

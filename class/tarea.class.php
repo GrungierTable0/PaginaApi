@@ -1,86 +1,93 @@
 <?php
-function select($id,$auth){
-    $url='https://adonisings.herokuapp.com/api/v1/projects/'.$id.'/tasks'; 
-    $options = array(
-        CURLOPT_URL => $url,
-        CURLOPT_USERPWD => $auth,
-        CURLOPT_RETURNTRANSFER => 1
-    );
+class tarea{
+    function select($id,$auth){
+        $url='https://adonisings.herokuapp.com/api/v1/projects/'.$id.'/tasks'; 
+        $ch = curl_init();
+        $options = array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => 1
+        );
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array($auth));
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt_array($ch,$options);
+        
+        
+        $result = curl_exec($ch);
+        
+        curl_close($ch);
+        $respond = json_decode($result);
+        return $respond;
     
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-    curl_setopt_array($ch,$options);
+    }
+    function create($desc,$id,$auth){
+        $url='https://adonisings.herokuapp.com/api/v1/projects/'.$id.'/tasks'; 
+        $data = array(
+            'description' => $desc
+        );
+        $ch = curl_init();
+        
+        $options = array(
+            CURLOPT_URL => $url,
+            CURLOPT_POST => 1,
+            CURLOPT_POSTFIELDS => $data,
+            CURLOPT_RETURNTRANSFER => 1
+        );
+        
+        curl_setopt_array($ch,$options);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array($auth));
+        
+        $result = curl_exec($ch);
+        
+        curl_close($ch);
+        $respond = json_decode($result);
+        return $respond;
+    }
     
-    $result = curl_exec($ch);
+    function delete($idt,$auth){
+        $url='https://adonisings.herokuapp.com/api/v1/tasks/'.$idt; 
+        
+        $ch = curl_init();
+        
+        $options = array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => 1
+        );
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array($auth));
+        
+        curl_setopt_array($ch,$options);
+        
+        $result = curl_exec($ch);
+        
+        curl_close($ch);
+        return $result;
     
-    curl_close($ch);
-    return $result;
-
+    }
+    function update($idt,$finished,$desc,$auth){
+        $url='https://adonisings.herokuapp.com/api/v1/tasks/'.$idt; 
+        $data = array(
+            'description' => $desc,
+            'finished' => $finished
+        );
+        $ch = curl_init();
+        
+        $options = array(
+            CURLOPT_URL => $url,
+            CURLOPT_POSTFIELDS => $data,
+            CURLOPT_RETURNTRANSFER => 1
+        );
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PATCH");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array($auth));
+        
+        curl_setopt_array($ch,$options);
+        
+        $result = curl_exec($ch);
+        
+        curl_close($ch);
+        $respond = json_decode($result);
+        return $respond;
+    }
 }
-function create($desc,$id,$auth){
-    $url='https://adonisings.herokuapp.com/api/v1/projects/'.$id.'/tasks'; 
-    $data = array(
-        'description' => $desc
-    );
-    $ch = curl_init();
-    
-    $options = array(
-        CURLOPT_URL => $url,
-        CURLOPT_POST => 1,
-        CURLOPT_USERPWD => $auth,
-        CURLOPT_POSTFIELDS => $data,
-        CURLOPT_RETURNTRANSFER => 1
-    );
-    
-    curl_setopt_array($ch,$options);
-    
-    $result = curl_exec($ch);
-    
-    curl_close($ch);
-    return $result;
-}
-
-function delete($id,$auth){
-    $url='https://adonisings.herokuapp.com/api/v1/projects/'.$id.'/tasks'; 
-    
-    $ch = curl_init();
-    
-    $options = array(
-        CURLOPT_URL => $url,
-        CURLOPT_USERPWD => $auth,
-        CURLOPT_RETURNTRANSFER => 1
-    );
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-    
-    curl_setopt_array($ch,$options);
-    
-    $result = curl_exec($ch);
-    
-    curl_close($ch);
-    return $result;
-
-}
-function update($id,$finished,$desc,$auth){
-    $url='https://adonisings.herokuapp.com/api/v1/projects/'.$id.'/tasks'; 
-    $data = array(
-        'description' => $desc,
-        'description' => $finished
-    );
-    $ch = curl_init();
-    
-    $options = array(
-        CURLOPT_URL => $url,
-        CURLOPT_USERPWD => $auth,
-        CURLOPT_POSTFIELDS => $data,
-        CURLOPT_RETURNTRANSFER => 1
-    );
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PATCH");
-    
-    curl_setopt_array($ch,$options);
-    
-    $result = curl_exec($ch);
-    
-    curl_close($ch);
-    return $result;
-}
+$tarea=new tarea;
 
 ?>

@@ -1,3 +1,8 @@
+<?php
+    require_once("../../class/tarea.class.php");
+    session_start();
+    $id= isset($_GET['id']) ? $_GET['id'] : null;
+?>
 <!doctype html>
 <html lang="en">
 
@@ -16,19 +21,32 @@
     <body>
         <header class="site-header sticky-top py-1">
             <nav class="container d-flex flex-column flex-md-row justify-content-between">
-                <a class="py-2 d-none d-md-inline-block" href="../tareas.php">Regresar</a>
+                <a class="py-2 d-none d-md-inline-block" href="../tareas.php?id=<?php echo $id?>">Regresar</a>
             </nav>
         </header>
         <form method="POST" enctype="multipart/form-data" >
             <label class="form-label">Descripción: </label>
-            <input class="form-control" type="text" name="data[name]"/>
-
-            <label class="form-label">ID del proyecto: </label>
-            <input class="form-control" type="number" name="data[id_proyecto]"/>
+            <input class="form-control" type="text" name="data[desc]"/>
             
-            <input class="btn btn-primary" type="submit" value="Guardar Proyecto" name='data[enviar]'/>
+            <input class="btn btn-primary" type="submit" value="Guardar Tarea" name='data[enviar]'/>
 
         </form>
+        <?php
+            $data=isset($_POST['data'])?$_POST['data']:null;
+            if(isset($data['enviar'])){
+                if(empty($data['desc'])){
+                    echo '<div class="alert alert-danger" role = "alert" >ha ocurrido un error favor de verificar</div>';
+                }else{
+                    $respond=$tarea->create($data['desc'],$id,$_SESSION['auth']);
+                    if(is_null($respond->description)){
+                        echo '<div class="alert alert-danger" role = "alert" >ha ocurrido un error favor de verificar</div>';
+                    }else{
+                        echo '<div class="alert alert-success" role = "alert" >Se ha realizado la accion correctamente</div>';
+                    }
+                }
+                    
+            }
+        ?>
     </body>
     <footer class="container py-5">
         <div class="row">

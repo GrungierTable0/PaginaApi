@@ -1,3 +1,7 @@
+<?php
+    require_once('../class/login.class.php');
+    error_reporting(E_ERROR | E_PARSE);
+?>
 <!doctype html>
 <html lang="en">
 
@@ -19,25 +23,50 @@
         <div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
             <div class="modal-dialog" role="document">
                 <div class="modal-content rounded-5 shadow">
+                    <?php
+                        $data=isset($_POST['data'])?$_POST['data']:null;
+                        if(isset($data['enviar'])){
+                            if(empty($data['email'])){
+                                echo '<div class="alert alert-danger" role = "alert" >Falta un correo</div>';
+                            }else{
+                                if(empty($data['password'])){
+                                    echo '<div class="alert alert-danger" role = "alert" >Falta contraseña</div>';
+                                }else{
+                                    $respond=$login->login($data['email'],$data['password']);
+                                    if(is_null($respond->token)){
+                                        echo '<div class="alert alert-danger" role = "alert" >ha ocurrido un error favor de verificar</div>';
+                                    }else{
+                                        header('Location: ../usermain.php');  
+                                        session_start();
+                                        $_SESSION["email"] = $data['email'];
+                                    }
+                                }
+                            }
+                        }
+                    ?>
                     <div class="modal-header p-5 pb-4 border-bottom-0">
                         <!-- <h5 class="modal-title">Modal title</h5> -->
                         <h2 class="fw-bold mb-0">Iniciar Sesión</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body p-5 pt-0">
-                        <form method="POST" class="" action="login.php?accion=login">
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com" name="correo">
-                            <label for="floatingInput">Correo electrónico</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password" name="contrasena">
-                            <label for="floatingPassword">Contraseña</label>
-                        </div>
-                        <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up</button>
-                        <br/>
-                        <br/>
+                        <form method="POST" enctype="multipart/form-data" >
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control rounded-4" placeholder="name@example.com" name="data[email]">
+                                <label for="floatingInput">Correo electrónico</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control rounded-4" placeholder="Password" name="data[password]">
+                                <label for="floatingPassword">Contraseña</label>
+                            </div>
+                            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" name='data[enviar]'>Sign up</button>
+                            <br/>
+                            <br/>
+
+                            
+                        </form>
+                        
+                        
                     </div>
                 </div>
             </div>

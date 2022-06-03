@@ -1,3 +1,6 @@
+<?php
+    require_once('../../class/usuario.class.php');
+?>
 <!doctype html>
 <html lang="en">
 
@@ -10,7 +13,7 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-        <title>Login</title>
+        <title>Crear Usuario</title>
     </head>
 
     <body>
@@ -21,7 +24,7 @@
         </header>
         <form method="POST" enctype="multipart/form-data" >
             <label class="form-label">E-mail: </label>
-            <input class="form-control" type="text" name="data[email]"/>
+            <input class="form-control" type="email" name="data[email]"/>
 
             <label class="form-label">Password: </label>
             <input class="form-control" type="text" name="data[password]"/>
@@ -29,6 +32,25 @@
             <input class="btn btn-primary" type="submit" value="Guardar usuario" name='data[enviar]'/>
 
         </form>
+        <?php
+            $data=isset($_POST['data'])?$_POST['data']:null;
+            if(isset($data['enviar'])){
+                if(empty($data['email'])){
+                    print_r('Necesitas un correo');
+                }else{
+                    if(empty($data['password'])){
+                        print_r('Necesitas una contraseña');
+                    }else{
+                        $respond=$usuario->create($data['email'],$data['password']);
+                        if(is_null($respond->email)){
+                            echo '<div class="alert alert-danger" role = "alert" >ha ocurrido un error favor de verificar</div>';
+                        }else{
+                            echo '<div class="alert alert-success" role = "alert" >Se ha realizado la accion correctamente</div>';
+                        }
+                    }
+                }
+            }
+        ?>
     </body>
     <footer class="container py-5">
         <div class="row">

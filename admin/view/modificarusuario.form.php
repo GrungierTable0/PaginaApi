@@ -1,3 +1,9 @@
+<?php
+    require_once("../../class/usuario.class.php");
+    require_once("../../class/login.class.php");
+    session_start();
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -29,6 +35,28 @@
             <input class="btn btn-primary" type="submit" value="Modificar usuario" name='data[enviar]'/>
 
         </form>
+        <?php
+            $data=isset($_POST['data'])?$_POST['data']:null;
+            if(isset($data['enviar'])){
+                if(empty($data['email'])){
+                    echo '<div class="alert alert-success" role = "alert" >Necesitas un correo</div>';
+                }else{
+                    if(empty($data['password'])){
+                        print_r('Necesitas una contraseña');
+                    }else{
+                        $respond=$usuario->update($_SESSION['email'],$data['email'],$data['password'],$_SESSION['auth']);
+                        
+                        if(is_null($respond->email)){           
+                            echo '<div class="alert alert-danger" role = "alert" >ha ocurrido un error favor de verificar</div>';
+                        }else{
+                            header("Location:../../index.php");
+                            echo '<div class="alert alert-success" role = "alert" >Se ha realizado la accion correctamente</div>';
+
+                        }
+                    }
+                }
+            }
+        ?>
     </body>
     <footer class="container py-5">
         <div class="row">

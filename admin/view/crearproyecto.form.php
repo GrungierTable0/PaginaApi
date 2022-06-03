@@ -1,3 +1,7 @@
+<?php
+    require_once("../../class/proyecto.class.php");
+    session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -26,6 +30,22 @@
             <input class="btn btn-primary" type="submit" value="Guardar Proyecto" name='data[enviar]'/>
 
         </form>
+        <?php
+            $data=isset($_POST['data'])?$_POST['data']:null;
+            if(isset($data['enviar'])){
+                if(empty($data['name'])){
+                    echo '<div class="alert alert-danger" role = "alert" >ha ocurrido un error favor de verificar</div>';
+                }else{
+                    $respond=$proyecto->create($data['name'],$_SESSION['auth']);
+                    if(is_null($respond->name)){
+                        echo '<div class="alert alert-danger" role = "alert" >ha ocurrido un error favor de verificar</div>';
+                    }else{
+                        echo '<div class="alert alert-success" role = "alert" >Se ha realizado la accion correctamente</div>';
+                    }
+                }
+                    
+            }
+        ?>
     </body>
     <footer class="container py-5">
         <div class="row">

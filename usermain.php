@@ -1,3 +1,8 @@
+<?php
+    require_once('class/login.class.php');
+    require_once('class/usuario.class.php');
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,8 +21,14 @@
         <nav class="container d-flex flex-column flex-md-row justify-content-between">
             <a class="py-2 d-none d-md-inline-block" href="admin/proyectos.php">Administrar Proyectos</a>
             <a class="py-2 d-none d-md-inline-block" href="admin/view/modificarusuario.form.php">Modificar mi usuario</a>
-            <a class="py-2 d-none d-md-inline-block" href="#">Eliminar mi usuario</a>
-            <a class="py-2 d-none d-md-inline-block" href="index.php">Cerrar Sesión</a>
+            <a class="py-2 d-none d-md-inline-block" href="?eliminar=true">Eliminar mi usuario</a>
+            
+
+            <a class="py-2 d-none d-md-inline-block" href="index.php">
+                <?php
+                    echo '('.$_SESSION['email'].')';
+                ?> Cerrar Sesión
+            </a>
         </nav>
     </header>
     <main>
@@ -25,7 +36,15 @@
             <div class="col-md-5 p-lg-5 mx-auto my-5">
             <h1 class="display-4 fw-normal">BIENVENIDO!!</h1>
             <p class="lead fw-normal">Se te ocurre la mejor forma de administrar tu tiempo y tus futuros proyectos <br>
-                Gracias por dejar esta importante labor en nuestras manos uwu 
+                Gracias por dejar esta importante labor en nuestras manos uwu       
+                <?php 
+                $action= isset($_GET['eliminar']) ? $_GET['eliminar'] : null;
+                if($action == "true"){
+                    $respond = $usuario->delete($_SESSION['email'],$_SESSION['auth']);
+                    header('Location: index.php'); 
+                }
+                ?>
+
             </p>
                 <a class="btn btn-outline-secondary" href="admin/tareas.php">Administrar Tareas</a>
                 <a class="btn btn-outline-secondary" href="admin/proyectos.php">Administrar Proyectos</a>
